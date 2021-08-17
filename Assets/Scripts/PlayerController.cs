@@ -8,20 +8,23 @@ public class PlayerController : MonoBehaviour
     public bool isRight = true;
     public static Rigidbody2D rb2D;
 
-    
+
+    private float ScreenWidth;
     private float movInput;
 
     
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        
+        ScreenWidth = Screen.width;
+
     }
 
     
     void FixedUpdate()
     {
         movInput = Input.GetAxis("Horizontal");
+
         rb2D.velocity = new Vector2(movInput * speed, rb2D.velocity.y);
         
         if(isRight == false && movInput > 0)
@@ -32,6 +35,8 @@ public class PlayerController : MonoBehaviour
         {
             FlipX();
         }
+
+
     }
 
     void FlipX()
@@ -40,5 +45,19 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    public void MovRight()
+    {
+        
+        rb2D.velocity = new Vector2( speed, rb2D.velocity.y);
+        Debug.Log("botao direito");
+    }
+    public void MovLeft()
+    {
+        
+        rb2D.velocity = new Vector2(speed, rb2D.velocity.y);
+        Debug.Log("botao esquerdo");
+
     }
 }
